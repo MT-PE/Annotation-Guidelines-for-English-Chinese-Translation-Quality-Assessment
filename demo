@@ -1,0 +1,1681 @@
+
+<p>...</p>
+
+<p align="center">
+    英汉翻译质量评估标注指南
+</p>
+<p align="center">
+    Annotation Guidelines for English-Chinese Translation Quality Assessment
+</p>
+
+<p align="center">
+    <strong><u><a id="Overview">总览</a></u></strong>
+</p>
+<p>
+<a href="#Intro">引言</a>
+<ul>
+	<li><a href="#Brat">UAM Corpus Tool的基本操作</a></li>
+	<li><a href="#Rules">总体标注规则</a></li>
+	<li><a href="#Resources">当您不确定时：资源推荐</a></li>
+</ul>
+</p>
+<p>
+<a href="#AccAn">第一步：标注可接受度</a>
+</p>
+<ul>
+	<li><a href="#accepterr">可接受度错误类型</a></li>
+</ul>
+<p>
+<a href="#PrepStep2">下一步的文本准备工作</a>
+</p>
+<p>
+<a href="#AdAn">第二步：标注忠实度</a>
+</p>
+<ul>
+	<li><a href="#AdCats">忠实度错误类型</a></li>
+</ul>
+<p>
+<a href="#Consolidation">第三步：确认标注</a>
+</p>
+<ul>
+	<li><a href="#Linking">制定“统一标准”</a></li>
+</ul>
+<p>
+    <strong><u></u></strong>
+</p>
+<p align="center">
+    <strong><u><a id="Intro">引言</a></u><a href="#Overview" title="Back to Overview">&#8617;</a></strong>
+</p>
+<p>
+翻译质量评估是一项非常复杂的任务，评估的目的不同，评估的方式也会不同。本次翻译质量评估的目的是对比不同翻译模式下（人工翻译、机器翻译和机器翻译译后编辑）的翻译质量有何异同，尤其是在细粒度方面（fine-grained），即翻译错误类型上的异同。传统翻译质量评估在错误罚分（severity score）上往往比较主观，且局限于句子层面，忽视了衔接、连贯等语篇方面的评分。本次翻译质量评估错误类型分类（categorization of translation errors）和错误权重（error weights）是基于英汉语言特征、Daems et al.（2017）的英-荷翻译质量评估模型和Burchardt & Lommel（2014）的MQM<sup><a href="#fn1" id="ref1">1</a></sup>多维度翻译质量评估模型；本次翻译错误类型标注模式参照Daems et al.（2017）<sup><a href="#fn2" id="ref2">2</a></sup>的两步翻译质量错误类型标注模式（a two-step TQA approach）和基于用户定义的错误类型权重（user-defined error weights）分类标准。 
+</p>
+<p>
+    <u>翻译错误类型分类</u>
+</p>
+<p>
+    本次翻译错误分为两大类：忠实度（Adequacy）和可接受度（Acceptability）。
+</p>
+<p>
+    <u>错误权重（Error weights）</u>
+</p>
+<p>
+    错误权重的分类和判定工作由研究者确定，而非由标注员（annotators）确定。本课题参照Daems et al.（2017）所制定的翻译错误权重层级，并根据本课题的文本类型（科学类新闻）和英汉之间的差异，将术语错误和术语不一致等错误权重作出适当修正。忠实度和可接受度中不同错误类型的错误权重可参见忠实度（Adequacy）和可接受度（Acceptability）。以下是本课题的5级错误权重分类标准：
+</p>
+<p>	
+<ul>
+	<li>0：不属于真正的问题（not an actual problem）：这一类别的问题由两类因素决定，一类是由任务本身决定，例如：显化（explicitation）；另一类是由翻译环境所致，例如一些被试由于键盘输入法临时卡顿，导致打字错误（typo）。在真实工作环境中，这种情况不会发生。</li>
+	<li>1：轻微问题（minor problems）: 译文依旧可以毫不费力地理解，而且译文所传递的信息与原文相一致。但译文存在一个小错误或者可读性略受一点影响，例如：拼写错误、标点符号错误、语域问题和重复错误。</li>
+	<li>2：中度问题（medium problems）: 原文和译文所传递的意思略有偏差，例如：词汇层面漏译；或者译文不怎么需要费力就可以理解，但在一些语法、风格或衔接与连贯性上不完全正确，例如：一致性错误和词汇衔接错误。</li>
+	<li>3：重要错误（major problems）: 译文与原文传递的意思有一些偏差，例如选词不当、句法层面漏译和衔接错误；或者译文由于语法结构不正确或突兀的表达，导致可读性较差，例如：语序错误和搭配错误。</li>
+	<li>4：严重错误（critical problems）: 此类错误是指对译文的可读性和准确性产生严重影响的错误，例如：词义错误、语义矛盾、术语错误和逻辑错误。</li>
+</ul>
+</p>
+<p>
+    <strong><u><a id ="Brat">UAM Corpus Tool的基本操作</a></u></strong><a href="#Overview" title="Back to Overview">&#8617;</a>
+</p>
+<p>1. 先将UAM Corpus Tool安装到本地计算机，然后将TQA_PhD-rater1/2压缩包“解压到当前文件夹”，随后双击打开TQA_PhD-rater1/2.ct3文件。</p>
+<p>2. 请先完成Acceptability_001~143的所有语料标注工作后，再开始Adequacy_001~118的语料标注工作。</p>
+<p>3. 用鼠标选择一个您认为的翻译错误，标注框下方会显示所有主类别，鼠标双击主类别的某一项（如Grammar），则该项会移至Selected栏中。此时，请务必选择右侧的子类别！</p>
+<p>4. 如发现选错类别，请在Selected中双击该类别；如想删除该词的所有错误类型标注，则选择该词后，点击Delete。</p>
+<p>5. 请务必在每一个子类别下的Comment栏中填写标注的理由，以便后期统一标注类型。</p>
+<p>6. 您可以多次选择同一个汉字或词语，因此您可以把不同的错误类型赋予同一个汉字或词语。</p>
+
+<p>
+    <strong><u><a id ="Rules">总体标注规则</a></u></strong><a href="#Overview" title="Back to Overview">&#8617;</a>
+</p>
+<p>1） 除非另有说明（如漏译），一般情况下请在汉语译文中标注错误类型。</p>
+<p>2） 请同时选择主类别（如Meaning shift、Grammar、Lexicon和Cohesion & coherence等）和子类别（如Contradiction、Word sense和Cohesion）。</p>
+<p>3） 请在标注完每一个错误类型后，都务必在Comment栏中注明标注理由（中英文皆可）。</p>
+<p>4） 如果一个元素包含不只一个错误，则它包含几个错误，就选择几次，每次代表一个错误（例如，一个词既包含术语错误，也包含术语不一致的错误）。</p>
+<p>5） 仅在没有更合适的错误类型的情况下，选择标注为“Other”。 </p>
+<p>6） 如果您不确定某一标注是否准确，请在Comment栏中注明问号“？？”，以表示不确定。</p>
+<p>7） 如果同一错误重复出现，则一一标注这些错误。</p>
+<p>8） 如果某一问题影响了整个句子或某一问题无法在句中标注，则标注句子编号。其它情况下，均在句子内部进行标注。</p>
+
+<p>
+    <strong><u><a id ="Resources">当您不确定时：资源推荐</a></u></strong><a href="#Overview" title="Back to Overview">&#8617;</a>
+</p>
+<p>
+    If you are not sure whether or not something is an error, don't be afraid to consult external sources. You are perfectly allowed to use a dictionary or a
+    search engine to look things up. Some useful sites that you could consult for acceptability issues are:
+</p>
+<p><a href="https://www.ldoceonline.com/">https://www.ldoceonline.com/</a></p>
+<p><a href="https://www.merriam-webster.com/">https://www.merriam-webster.com/</a></p>
+<p><a href="https://www.oxfordlearnersdictionaries.com/us/">https://www.oxfordlearnersdictionaries.com/us/</a></p>
+<p><a href="http://bcc.blcu.edu.cn/">http://bcc.blcu.edu.cn/</a></p>
+<p><a href="http://corpus.zhonghuayuwen.org/">http://corpus.zhonghuayuwen.org/</a></p>
+<p><a href="http://ccl.pku.edu.cn:8080/ccl_corpus/">http://ccl.pku.edu.cn:8080/ccl_corpus/</a></p>
+
+<strong>
+    <u>
+        <br clear="all"/>
+    </u>
+</strong>
+<p>
+    <strong><u></u></strong>
+</p>
+<p align="center">
+    <strong><u><a id="AccAn">第一步：标注可接受度(Acceptability)</a></u></strong><a href="#Overview" title="Back to Overview">&#8617;</a>
+</p>
+<p>您将标注的文本为英译汉的翻译产品。翻译质量错误类型标注将围绕以下两个重要的维度展开：忠实度(Adequacy)和可接受度(Acceptability)。忠实度关注原文和译文的关系，而可接受度关注目标语文本和语言层面。目前您的任务是标注翻译产品的可接受度层面的错误类型。忠实度层面的错误类型须在此步骤完成后单独进行。为了确保您在标注可接受度错误类型时，只关注目标语文本和语言层面的错误，您在此过程中仅有汉语译文供您标注，而没有英语原文，目的是为了避免您在标注可接受度层面的错误时受原文的影响。</p>
+<p>可接受度指译文遵循目标语的语言和文化规范。优秀的译文需要读起来像是汉语本族人写得文章一样。这里的规范包括：语言层面（语法、词汇、拼写）、文章结构（衔接与连贯）和文本类型层面（如：新闻报纸的文章风格与用户手册的风格不同）。</p>
+<p>作为标注人员，请以出版级别的质量要求来标注译文的可接受度错误。请将不符合汉语语言规范、不符合汉语新闻文体结构要求的错误标注出来。请在UAM Corpus Tool中完成标注工作，忠实度错误的主类别是语法(Grammar)、词汇(Lexicon)、技术性细节(Mechanics)、风格和语域(Style & register)、衔接与连贯(Cohesion & Coherence)，其子类别已事先确定。各类别的定义和层次结构可通过UAM Corpus Tool中的LayersEdit Scheme查看。</p>
+
+<p>
+    <u></u>
+</p>
+<p>
+    <strong><u><a id ="accepterr">可接受度错误类型</a></u></strong><a href="#Overview" title="Back to Overview">&#8617;</a>
+</p>
+<table border="1" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td width="124" valign="top">
+                <p>
+                    <strong><a href="#GramSyn">语法(Grammar)</a></strong>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <strong><a href="#Lexicon">词汇(Lexicon)</a></strong>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <strong><a href="#SpelTyp">技术性细节(Mechanics)</a></strong>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <strong><a href="#StyleReg">风格和语域(Style & register)</a></strong>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <strong><a href="#Coherence">衔接与连贯(Cohesion & coherence)</a></strong>
+                </p>
+            </td>
+        </tr>
+<tr>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Tense">时体态错误(Tense-mood-aspect)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Collocation">搭配问题(Collocation)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Spelling">错别字<br />(Spelling)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Register">语域问题(Register)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Cohesion">衔接问题(Cohesion)</a>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Superfluous">多余成分(Superfluous - superfluous word or constituent)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Named">命名实体(Named entity)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Typo">打字错误<br />(Typo)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Repetition">重复问题(Repetition)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Logical">逻辑问题(Logical)</a>
+                </p>
+            </td>
+        </tr>
+       <tr>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Missing">成分缺失(Missing - missing constituent)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Non">不存在的词(Word non-existent)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Punctuation">标点符号(Punctuation)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Unidiomatic">不地道(Unidiomatic)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Inconsistency">不一致(Inconsistency)</a>
+                </p>
+            </td>
+        </tr>
+         <tr>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Other-G">其它语法问题(Grammar other)</a>
+                </p>
+            </td>
+             <td width="124" valign="top">
+                <p>
+                    <a href="#Ambiguity">词汇/短语歧义(Lexical/phraseological ambiguity)</a>
+                </p>
+            </td>
+            <td width="124" valign="top">
+            </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Awkward">拗口<br/>(Awkward)</a>
+                </p>
+           </td>
+            <td width="124" valign="top">
+                <p>
+                    <a href="#Other-C">其它衔接与连贯问题(Cohesion & coherence other)</a>
+                </p>
+            </td>
+         </tr>
+          <tr>
+             </td>
+            <td width="124" valign="top">
+            </td>
+            <td width="124" valign="top">    
+                <p>
+                    <a href="#Formulaic">程式表达(Formulaic sequences)</a>
+                </p>
+             </td>
+            <td width="124" valign="top">
+            </td>
+            <td width="124" valign="top">    
+                <p>
+                    <a href="#Short">句段过短(Short sentence segments)</a>
+                </p>
+             </td>
+            <td width="124" valign="top">
+         </tr>
+         <tr>
+             </td>
+            <td width="124" valign="top">
+            </td>
+            <td width="124" valign="top">    
+             </td>
+            <td width="124" valign="top">    
+            </td>
+            <td width="124" valign="top">    
+                <p>
+                    <a href="#Text">文本类型(Text type)</a>
+                </p>
+              </td>
+            <td width="124" valign="top">    
+           </tr>
+           <tr>
+             </td>
+            <td width="124" valign="top">
+            </td>
+            <td width="124" valign="top">    
+             </td>
+            <td width="124" valign="top">    
+            </td>
+            <td width="124" valign="top">    
+                <p>
+                    <a href="#Other-S">其它风格和语域问题(Style & register other)</a>
+                </p>
+              </td>
+            <td width="124" valign="top">    
+           </tr>
+    </tbody>
+</table>
+<p>
+   <strong><u><a id ="GramSyn">语法(Grammar)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p>
+    <em>定义 </em>
+    ：“不符合汉语语法和结构规则的错误。”
+<p>
+ <em>Definition </em>
+    : 'This does not follow the grammatical or structural rules of the Chinese language.'
+</p>
+
+<p>
+   <strong><u><a id ="Tense">时体态错误(Tense-mood-aspect)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+      <p>
+           <em>定义 </em>
+       ：“动词形式的时、体、态的呈现存在错误。”
+      <p>
+     <em>Definition </em>
+      :  ‘A verbal form displays the wrong tense, mood, or aspect.’
+</p>
+     <p>
+        <em>标注方式</em>
+        ：选择错误的动词形式。
+     <p>
+       <em>Annotation</em>
+       : Select the incorrect verb form. 
+    </p>
+      <ul>
+        <li> 例:
+            1987年在北卡罗来纳州重新引入的一群红狼因<u>正在消失</u>。 
+        <li>“消失”属于不可重复瞬间动词（施栋琴, 2002），不可能“正在消失”，可改为“纷纷消亡”。
+      </ul>
+<p>
+   <strong><u><a id ="Superfluous">多余成分(Superfluous - superfluous word or constituent)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+   <p>
+    <em>定义 </em>
+    ：“该句因存在多余成分或词，导致语法不正确。这一成分可以是该句中先前出现过的成分或者连续出现两次的词。”
+<p>
+ <em>Definition </em>
+   : 'The sentence is grammatically incorrect because there is a superfluous constituent or word. This can be a constituent that already appeared earlier in the sentence or a word that has been written twice in a row.'
+</p>
+   <p>
+    <em>标注方式</em>
+    ：选择多余的词或成分。如果该词出现两次，删除任意一个词都可以使该句的语法正确，则选择第一次出现的词。
+<p>
+ <em>Annotation</em>
+   :  Select the superfluous word or constituent. If the word appears twice and either one of them can be deleted to make the sentence grammatically correct, select the first occurrence of the word.
+</p>
+       <ul>
+             <li>例:
+               鳄鱼河国家野生动物保护区在外滩群岛附近放出了<u>一批的</u>红狼种群。（TT02）
+         <li>汉语中只会说“一批”红狼，而不会说“一批的”红狼。此处多了一个“的”，语法上不正确。
+      </ul>
+</p>
+<p>
+   <strong><u><a id ="Missing">成分缺失(Missing - missing constituent or preposition)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+	<p>
+    <em>定义 </em>
+    ：“该句语法不正确，是因为句子结构中必要的结构缺失，比如介词或句子的直接宾语。”
+<p>
+ <em>Definition </em>
+   : 'The sentence is grammatically incorrect because a necessary part of the structure is missing, this can be a preposition or an entire constituent such as an obligatory direct object.'
+</p>
+   <p>
+    <em>标注方式</em>
+    ：如果介词缺失，则选择缺失的介词后的相应名词短语。如果缺失主语或宾语，则选择动词。
+<p>
+ <em>Annotation</em>
+   :  If a preposition is missing, select the noun phrase following the missing preposition. If an essential subject or object is missing, select the verb.
+</p>
+</p>
+<p>
+   <strong><u><a id ="Other-G">其它语法错误(Grammar other)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+<p>
+当您发现某一处语法错误不属于以上任何错误类型时，请选择此类别。请务必给出您选择此类别的理由。</p>
+<p>Choose this category when you encounter a grammatical error that does not belong to any of the abovementioned categories. Always explain why you choose this category. </p>
+
+ <strong><u><a id ="Lexicon">词汇问题(Lexicon)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“根据汉语特征，此处存在词汇问题或错误。”
+<p>
+ <em>Definition </em>
+   : 'This is a lexical problem/error when looking at the Chinese language.'
+</p>
+
+ <strong><u><a id ="Collocation">搭配问题(Collocation)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“该词在汉语中存在，但在使用方面存在错误或突兀，例如两词的组合不常见，在固定表达中存在错误。”
+<p>
+ <em>Definition </em>
+   :  'The word(s) exist(s) in Chinese, but is/are used in the wrong or in a strange way: uncommon combinations of words, errors in fixed expressions,…'
+</p>
+<b><em>请注意！</em></b><font color="#FF0000"><b>如果词的组合在词汇层面正确，但在语境中不符合逻辑，则选择“衔接与连贯问题-逻辑问题”，而不选择“词汇问题-搭配问题”。</font></b>
+<p><em><b>Be careful! </em></b>If the combination of words is lexically correct, but not logical in the context, select 'Cohesion & coherence - Logical problem', not 'Lexicon - Wrong collocation'.
+<p>
+    <em>标注方式</em>
+    ：选择用法错误的词或成分。如果是固定表达存在问题，则选择整个表达（包括介词！）。如果一个名词和不恰当的动词或形容词搭配，则选择整个动词或形容词。
+<p>
+ <em>Annotation</em>
+   :  Select the word or constituent that is used in a wrong way. If there is a problem with a fixed expression, select the entire expression (prepositions included!). If an inappropriate verb or adjective is used with a noun, select the entire verb or adjective. 
+</p>
+       <ul>
+             <li>例:
+              ······<u>深的永久冻土层</u>被认为可以提供“故障安全”保护······ (TT04)
+         <li>“深的”和“永久冻土层”一起搭配显得很突兀。
+      </ul>
+</p>
+
+<strong><u><a id ="Named">命名实体(Named entity)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“命名实体（地理位置、人名、公司、机构等）使用不正确：（有部分）未译；（部分）翻译出来了，但在汉语中不存在。”
+<p>
+ <em>Definition </em>
+   :   'Incorrect use of named entity (geographical location, name, company, organization, etc.) in Chinese: <font color="#FF0000"><b>(partially) untranslated named entities</font></b> that have an official Chinese equivalent, (partially) translated named entities that do not exist in Chinese, etc.'
+</p>
+ <b><em>请注意！</em></b>译文中命名实体没有翻译成汉语，而是保留英语原文，则此类错误归为忠实度->未译。
+<p><em><b>Be careful! </em></b>If the named entity in an English text translated into Chinese is left untranslated, select 'Adequacy - Untranslated', not 'Lexicon - Named entity'.</p>
+    <em>标注方式</em>
+    ：选择命名实体。
+<p>
+ <em>Annotation</em>
+   :  Select the named entity.
+       <ul>
+             <li>例:
+              在<u>外河岸</u>附近的鳄鱼河国家野生动物保护区 (TT02)
+         <li>“外河岸”作为一个命名实体，令读者不知所云。
+      </ul>
+      <ul>
+             <li>例:
+              阿尔塔米拉诺是留在<u>Xochimilco</u>水上花园的大约20名渔民之一。(TT03)
+         <li>“Xochimilco”作为一个命名实体，并没有翻译成汉语，则属于命名实体问题，因为会给读者的阅读造成一定的影响。
+      </ul>
+</p>
+
+<strong><u><a id ="Non">不存在的词(Word non-existent)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“该词在汉语中不存在。如果某词未译，且在汉语中没有任何意义，则也归为此类。”
+<p>
+ <em>Definition </em>
+   :  'This word does not exist in Chinese. This category also includes untranslated words that make no sense in Chinese. '
+</p>
+<b> <em>请注意！</em></b>如果某词不存在是因为语法错误，则选择“语法和句法错误(Grammar & Syntax)”，而非“词汇-不存在的词(Lexicon-Word non-existent)”。
+<p><em><b>Be careful! </em></b> If the non-existent word is the result of incorrect grammar, select the appropriate category in the 'Grammar & Syntax' section, not 'Lexicon - Word non-existent'.
+<p>
+    <em>标注方式</em>
+    ：选择该词。
+<p>
+ <em>Annotation</em>
+   :  Select the word.
+       <ul>
+             <li>例:
+             它被设计成坚不可摧的<u>深冰</u>，······（TT04）
+         <li>根据“北京语言大学语料库中心（BCC）”语料库(http://bcc.blcu.edu.cn/)，“深冰”属于不存在的词。
+      </ul>
+</p>
+
+<strong><u><a id ="Ambiguity">词汇/短语歧义(Lexical/phraseological ambiguity)</strong></a></u></a><sup><a href="#fn3" id="ref3">3</a></sup><a href="#accepterr" title="Back to accepterr">&#8617</a>;
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“该句在词汇或短语层面存在语义上的歧义。”
+<p>
+ <em>Definition </em>
+   :  'The sentence is ambiguous in its meaning at lexical or phraseological level. '
+</p>
+    <em>标注方式</em>
+    ：选择该词或短语。
+<p>
+ <em>Annotation</em>
+   :  Select the word/phrase.
+       <ul>
+             <li>例:
+             原始人造岛 (TT03)
+         <li>该名词短语存在歧义，可能会存在两种解读：1. 原始[人造岛]；2. 原始人[造岛]。
+      </ul>
+</p>
+
+<strong><u><a id ="Formulaic">程式表达(Formulaic expression)</a></u></strong><sup><a href="#fn4" id="ref4">4</a></sup><a href="#accepterr" title="Back to accepterr">&#8617;</a> 
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“该多词单位并不属于程式化的表达。”
+<p>
+ <em>Definition </em>
+   : 'The multiword units are not formulaic sequences '
+</p>
+    <em>标注方式</em>
+    ：选择该多词单位。
+<p>
+ <em>Annotation</em>
+   : Select the multiword unit. 
+       <ul>
+             <li>例:
+             在世界有记录以来最热的一年即将结束之际，······ (TT04)
+         <li>该多词单位“世界有记录以来”不是汉语中的固定表达，建议改为：世界有史以来/全球有记录以来。
+      </ul>
+</p>
+
+
+<strong><u><a id ="SpelTyp">技术性细节(Mechanics)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>  <p align="center">
+<p>
+    <em>定义 </em>
+    ：“不符合汉语的拼写和标点符号或存在打字错误。”
+<p>
+ <em>Definition </em>
+   :  'This does not follow the rules of spelling and punctuation of the Chinese language or this is a typo.'
+</p>
+
+
+<strong><u><a id ="Spelling">错别字(Spelling)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a> <p align="center">
+<p>
+ <em>定义 </em>
+    ：“某一汉字的拼写存在错误。”
+<p>
+ <em>Definition </em>
+   :   'Wrong spelling of a single Chinese character.'
+</p>
+<ul>
+             <li>例:
+           “霍奇米尔科的岛屿比渔人还多。”阿尔塔米拉诺这样<u>说到</u>。(TT03)
+         <li>此处的“说到”应该是“说道”。
+      </ul>
+
+<strong><u><a id ="Typo">打字错误(Typo)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a> 
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“这一错误很有可能是因为打字太快，导致汉字错位，或缺失一个汉字，或多输入一个汉字，或存在多余的空格。”
+<p>
+ <em>Definition </em>
+   : 'This error was probably caused by typing too fast: characters have been switched; there is a character missing or too many, there's a superfluous space,… '
+</p>
+<b> <em>请注意！</b></em>不用混淆拼写错误和打字错误。仅在某一错误无法归类时，选择“typo(打字错误)”，否则选择“Spelling mistake- single-character spelling mistake(拼写错误)”或其它恰当的类别。
+<p><em><b>Be careful! </em></b>  Do not interpret spelling mistakes as typos. Only select 'typo' if the error cannot be classified elsewhere, otherwise select 'spelling, typos & punctuation - single-word spelling mistake' or the appropriate category.
+<p>
+    <em>标注方式</em>
+    ：选择整个词，而不仅仅是一些需要调整的汉字。
+<p>
+ <em>Annotation</em>
+   : Select the entire word, not just the few characters that need to be changed.  
+       <ul>
+             <li>例:
+             当种子库于2008年建成时，其所在的永久冻土层被认为可以提供“完全”保障······(TT04)
+         <li>此处应该是“万全”，被试因打字速度过快，错把“万”打成了“完”。
+      </ul>
+</p>
+
+<strong><u><a id ="Punctuation">标点符号(Punctuation)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a> 
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“该句的标点符号使用错误或者缺失。”
+<p>
+ <em>Definition </em>
+   : 'The punctuation of the sentence is wrong or missing.'
+</p>
+ <em><b>请注意！</em></b>“如果存在引号错误，则同时选择标点符号和被引的词，而不仅仅是标点符号本身。”
+<p><em><b>Be careful! </em></b> If the punctuation mark is a quotation mark, you should select 'punctuation' and select the entire word, not just the punctuation mark.
+    <em>标注方式</em>
+    ：选择标点符号。
+<p>
+ <em>Annotation</em>
+   : Select the punctuation mark. 
+       <ul>
+             <li>例:
+             这一报告由<u>《美国鱼类及野生动植物管理局》</u>研究并在周二（4月24日）发布。(TT02)
+         <li>美国鱼类及野生动植物管理局”是一个机构的名称，不应加书名号。
+      </ul>
+</p>
+
+<strong><u><a id ="StyleReg">风格和语域问题(Style & register)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a> 
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“文章存在风格和语域层面的问题。”
+<p>
+ <em>Definition </em>
+   :  'The text has stylistic problems or problems in terms of register.'
+</p>
+
+<strong><u><a id ="Register">语域问题(Register)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a> 
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“两个词或表达意思相同，但该词或表达过于正式或过于非正式，因为这样的表达所属的语域不完全适合目标受众。”
+<p>
+ <em>Definition </em>
+   : 'The words have the same meaning, but the chosen word/expression is too formal/informal/... for the text or belongs to a regional variety of the language that is not entirely suitable for the target audience.'
+</p>
+    <em>标注方式</em>
+    ：选择不符合语域的词或表达。
+<p>
+ <em>Annotation</em>
+   : Select the word(s) or expression from the inappropriate register.
+       <ul>
+             <li>例:
+            最近，一组科学家团队<u>去到了</u>位于太平洋深处的阿塔卡马海沟，······(TT01)
+         <li>此句中“去到了”表述过于口语化，不符合正式的新闻语体，属于语域错误。
+      </ul>
+</p>
+
+<strong><u><a id ="Repetition">重复问题(Repetition)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a> 
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“同样一个词或表达使用过于频繁或出现距离过近，建议使用近义词。”
+<p>
+ <em>Definition </em>
+   :'The same or a very similar word/expression is used too often or is too close to the previous occurrence of the word/expression, it's better to use a synonym.'
+</p>
+    <em>标注方式</em>
+    ：选择重复出现的第一个词/表达，在Comment区注明为何/在何处该词/表达使用过于频繁。
+<p>
+ <em>Annotation</em>
+   :Select the first occurrence of this word/expression and specify why/where it has been used too often in the Comment section.
+       <ul>
+             <li>例:
+            纽卡斯尔大学于9月10日(周一)公布了这一研究结果。据<u>纽卡斯尔大学</u>介绍，研究人员在水下2.1万英尺处发现了三种新型的“神秘”蜗牛。(TT01)
+         <li>“纽卡斯尔大学”在这两句话中连续出现，略显重复。
+      </ul>
+</p>
+
+<strong><u><a id ="Unidiomatic">不地道(Unidiomatic)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a> 
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“这句话/成分并非存在语法错误或长句，而是受英语原文的影响，导致可读性差，需要使用更加地道的译文。”
+<p>
+ <em>Definition </em>
+   : 'The sentence / constituent is not grammatically incorrect nor syntactically long, but it is influenced by the English source text, which leads to low readability. It could be translated in a much more idiomatic way.'
+</p>
+    <em>标注方式</em>
+    ：选择影响译文可读性的成分。
+<p>
+ <em>Annotation</em>
+   :Select the constituent that affects readability.
+       <ul>
+             <li>例:
+           <u>它</u>被设计成坚不可摧的深冰，······(TT04)
+          <li>此处的“它”做主语不符合汉语表达习惯。
+      </ul>
+</p>
+
+<strong><u><a id ="Awkward">拗口(Awkward)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a> 
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“这句话包含过多的嵌套从句，或太冗长，虽然可以理解语义，但十分笨拙或冗长，理解起来有难度。”
+<p>
+ <em>Definition </em>
+   : 'A sentence is written with many embedded clauses and an excessively wordy style. While the meaning can be understood, the text is very awkward and difficult to follow.'
+</p>
+    <em>标注方式</em>
+    ：选择整个句子。
+<p>
+ <em>Annotation</em>
+   : Select the entire sentence.
+       <ul>
+             <li>例:
+           ······<u>联邦政府试图阻止北美唯一一只与众不同的狼在野外消失的努力</u>陷入了困境。(TT02)
+          <li> 此句中的“努力”前置定语过长，读起来比较吃力。
+      </ul>
+</p>
+
+<strong><u><a id ="Short">句段过短(Short sentence segments)</a></u></strong><sup><a href="#fn5" id="ref5">5</a></sup><a href="#accepterr" title="Back to accepterr">&#8617;</a> 
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“该句段包含过多短句段，影响了可读性”。
+<p>
+ <em>Definition </em>
+   :'This segment contains too many short sentence segments, which affects the readability.'
+</p>
+    <em>标注方式</em>
+    ：选择拆分该句，使其成为超过两句的标点符号，如逗号或分号。
+<p>
+ <em>Annotation</em>
+   :Select the punctuation marks, such as commas or semicolons, that separate the sentence into more than two sentence segments.
+       <ul>
+             <li>例:
+            阿兹特克<u>，</u>创造了最初的人工岛<u>，</u>也是第一个提出解决方案的人。(TT01)
+          <li> 此句话逗号太多，导致句段过短，影响了可读性，建议改为：“阿兹特克创造了最初的人工岛，也是第一个提出解决方案的人。”
+      </ul>
+</p>
+
+<strong><u><a id ="Text">文本类型(Text type)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“这未必是一个问题，但因为文本类型的关系，需要不同的句子结构或删除一些内容。”
+<p>
+ <em>Definition </em>
+   :'This is not necessarily a problem, but the text type allows or requires different constructions or deletions.'
+</p>
+       <ul>
+             <li>例:
+             挪威政府工作人员<u>赫格·阿斯金(Hege Njaa Aschim)</u> (TT04)
+          <li>在汉语新闻中通常只使用人名中的姓（last name），在此处应该只保留阿斯金(Aschim)即可。
+      </ul>
+</p>
+
+<strong><u><a id ="Other-S">其它风格和语域问题(Style & register other)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+<p>
+    当您发现某一处文体问题不属于以上任何错误类型时，请选择此类别。请务必给出您选择此类别的理由。
+<p>
+ Choose this category when you encounter a style/ register problem that does not belong to any of the abovementioned categories. Always explain why you choose this category. 
+</p>
+<ul>
+             <li>例:
+             在最近一次前往太平洋最深处之一的阿塔卡马海沟<u>(Atacama堑壕)</u>的旅途中......(TT01)
+          <li>此处的“(Atacama堑壕)”的括号中，英汉词汇同时出现，不符合汉语表达。
+      </ul>
+</p>
+
+<strong><u><a id ="Coherence">衔接与连贯(Cohesion & coherence)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“译文的衔接或连贯性存在问题，比如缺少指代词、连接词、逻辑结构存在问题、表述不一致等。”
+<p>
+ <em>Definition </em>
+   :'There is something wrong with the coherence of the text: lack of reference, conjunctin/linking words, and logical structure, inconsistency,…'
+</p>
+
+<strong><u><a id ="Cohesion">衔接问题(Cohesion)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：译文中必要的照应、替代、省略、链接或词汇衔接手段缺失，或使用不正确，导致译文无法很好地理解。
+<p>
+ <em>Definition </em>
+   : 'Portions of the text needed to connect it into an understandable whole (e.g., reference, substitution, ellipsis, conjunction, and lexical cohesion) are missing or incorrect.'
+</p>
+        <em>标注方式</em>
+       ：如果衔接词用法错误，则选择该衔接词。如果衔接词缺失，则选择本应该包含照应词的成分。
+     <p>
+       <em>Annotation</em>
+        : If there is a conjunction/linking word, select the characters. If the conjunction/linking word is missing, select the constituent that should have contained the conjunction/linking word.
+       <ul>
+             <li>例:
+             联邦政府试图阻止北美<u>唯一一只</u>与众不同的狼在野外消失的努力陷入了困境。
+          <li>根据上下文，联邦政府试图阻止的红狼数量不应只有一只。此处为词汇衔接手段错误。
+      </ul>
+</p>
+
+<strong><u><a id ="Logical">逻辑问题(Logical problem)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：逻辑问题是指译文选项根据文本的语境无法理解，或不符合事实常理。
+<p>
+ <em>Definition </em>
+   : 'Logical problems are those choices that do not make sense in the context of the text, or the world at large'
+</p>
+        <em>标注方式</em>
+       ：如果逻辑错误局限于句子的某一个词或一部分，则选择这个词或成分。如果整句话都存在逻辑错误，则选择整句话。
+     <p>
+       <em>Annotation</em>
+        :  If the logical problem is situated in one word or a part of the sentence, select this character/constituent. If the problem is situated in the whole sentence, select this sentence as a whole.
+       <ul>
+             <li>例:
+             <u>“Xochimilco的数量比渔民还多</u>，”阿尔塔米拉诺说。(TT03)。
+          <li>霍奇米尔科(Xochimilco)本身就是一个地方，不存在数量比渔民多，这里明显存在逻辑问题。
+      </ul>
+</p>
+
+<strong><u><a id ="Inconsistency">不一致(Inconsistency)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“术语或符号通篇使用不一致。”
+<p>
+ <em>Definition </em>
+   : 'Terms or notations are used inconsistently throughout the text.'
+</p>
+        <em>标注方式</em>
+       ：选择第一次出现不一致的词。
+     <p>
+       <em>Annotation</em>
+        : Select the first inconsistent occurrence of the word.
+       <ul>
+             <li>例:
+             据纽卡斯尔大学介绍，研究人员在水下2.1万英尺处发现了三种新型的“神秘”蜗牛。在视频中，这条新发现的<u>蜗牛鱼</u>看起来很长，呈胶状，皮肤半透明，动作轻盈。这条鱼看起来也比鱼饵附近的摄像机捕捉到的其他生物要大得多。(TT01)
+          <li>此例中第二句中为“蜗牛鱼”，而第一句中为“蜗牛”，表述不一致。
+      </ul>
+</p>
+
+<strong><u><a id ="Other-C">其它衔接连贯问题(Cohesion & coherence other)</a></u></strong><a href="#accepterr" title="Back to accepterr">&#8617;</a>
+<p align="center">
+<p>
+   当您发现某一处衔接或连贯问题不属于以上任何错误类型时，请选择此类别。请务必给出您选择此类别的理由。
+<p>
+ Choose this category when you encounter a cohesion or coherence problem that does not belong to any of the abovementioned categories. Always explain why you choose this category. 
+</p>
+             <li>例:
+             	根据对一项为拯救红狼而建立的濒危物种项目的审查 ，联邦政府试图阻止 该狼在野外消失的努力陷入了困境，<u>红狼是北美仅有的独特物种</u>。(TT02)
+          <li>此例中前半句都在介绍联邦政府试图防止红狼灭绝，但遭遇了困境，后半句突然过渡到红狼属于北美仅有物种，前后半句的连贯性上略有不足。
+      </ul>
+</p>
+<p>
+<p align="center">
+    <strong><u><a id="PrepStep2">下一步文本的准备</a></u></strong><a href="#Overview" title="Back to Overview">&#8617;</a>
+<p>
+当您完成文本可接受度(Acceptability)的标注工作后，您需要为忠实度的标注工作做准备。为了确保您在标注忠实度时不受之前可接受度标注的影响，您需要在UAM Corpus Tool中上传Adequacy的文件夹，将所需标注的文档一一导入，即每标注完一份文件，导入下一份.txt文件。然后点击“TQA_Adequacy”，您会看到原文在上，译文在下，随后即可开始标注。
+</p>
+
+
+<p>
+<p align="center">
+    <strong><u><a id="AdAn">第二步：标注忠实度(Adquacy)</a></u></strong><a href="#Overview" title="Back to Overview">&#8617;</a>
+<p>在标注完可接受度(Acceptability)方面的错误后，目前您要做的工作是标注译文的忠实度方面的错误。</p>
+<p>忠实度指译者确保译文与原文所包含的信息一致。这意味着所有的语义矛盾、词义错误、增译、漏译问题都是潜在的忠实度错误。作为标注人员，请以出版级别的质量要求来标注译文的忠实度错误。请在UAM Corpus Tool中完成标注工作，忠实度错误的主类别是意义偏离(meaning shift)，其子类别已事先确定。各类别的定义和层次结构可通过UAM Corpus Tool中的LayersEdit Scheme查看。</p>
+</p>
+<p>
+    <strong><u><a id ="AdCats">忠实度错误类型</a></u></strong><a href="#Overview" title="Back to Overview">&#8617;</a>
+</p>
+<p>以下为忠实度纬度下具体的分类和具体子类别的定义、标注方式、注意事项和举例。</p>
+
+<div align="center">
+    <table border="1" cellspacing="0" cellpadding="0">
+        <tbody>
+            <tr>
+                <td width="281" valign="top">
+                    <p align="center">
+                        <strong>语义偏离(Meaning shift)</strong>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#WordSense">词义错误(Word sense)</a>
+                    </p>
+                </td>
+            </tr>
+	  <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Entity">命名实体错译(Entity)</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Terminology">术语错译(Terminology)</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Hyperonymy">上义词(Hyperonymy)</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Hyponym">下义词(Hyponymy) </a>
+                    </p>
+                </td>
+            </tr>
+              <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Overly">过于直译(Overly-literal)</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Contradiction">语义矛盾(Contradiction) </a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#AmbiguousT">歧义(Ambiguous translation)</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Pronoun">代词错译(Pronoun)</a>
+                    </p>
+                </td>
+            </tr>
+			<tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Quantity">数量错译(Quantity)</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Classifier">量词错译(Classifier)</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Misplaced">修饰错误(Misplaced word)</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Time">时间错译(Time)</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#CohesionT">衔接错译(Cohesion)</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Function">功能词错译(Function word)</a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Addition">增译(Addition) </a>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Deletion">漏译(Deletion)</a>
+                    </p>
+                </td>
+            </tr>
+	 <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Untranslated">未译(Untranslated)</a>
+                    </p>
+                </td>
+            </tr>
+	 <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Other-L">其它词汇错译(Other lexical mistranslation)</a>
+                    </p>
+                </td>
+            </tr>
+	 <tr>
+                <td width="281" valign="top">
+                    <p>
+                        <a href="#Other-M">其它(Other meaning shift)</a>
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<p>
+    <strong></strong>
+</p>
+<u>
+    <br clear="all"/>
+</u>
+<p>
+    <u></u>
+</p>
+
+<p>
+<strong><u><a id ="WordSense">词义错误(Word sense)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：某一汉语词汇是原文中某一词汇的汉语翻译之一，但这一汉语翻译并不适用于原文的语境。
+<p>
+ <em>Definition </em>
+   :  'The Chinese characters are a possible translation of the word in the ST, but not of the meaning the word has in this context.'
+</p>
+        <em>标注方式</em>
+       ：选择译文中相应的词。
+     <p>
+       <em>Annotation</em>
+        :  Select the character(s).
+       <ul>
+             <li>例:
+                    EN: A colony of red wolves that was reintroduced in North Carolina in 1987 is <u>failing</u>…(ST02)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: 1987年在北卡罗来纳重新引入的一群红狼正在<u>失败</u>，······
+            <li>“fail”有“失败”的意思，也有“衰退”的意思，但此处的意思应为后者。
+      </ul>
+</p>
+
+
+<strong><u><a id ="Entity">命名实体错译(Entity)</a></u></strong><sup><a href="#fn6" id="ref6">6</a></sup><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：人名、地名或其它实体机构名称与原文不匹配。”
+<p>
+ <em>Definition </em>
+   :  'Names, places, or other “named entities” do not match.'
+</p>
+        <em>标注方式</em>
+       ：选择实体名称，详见<strong><a href ="#App1">附录1：英汉命名实体表</a></strong>。
+     <p>
+       <em>Annotation</em>
+        :  Select the named entity. Please refer to the Appendix 1: English-Chinese Glossary_Named entity.
+</p>
+
+<strong><u><a id ="Terminology">术语错译(Terminology)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：没有遵循特定的术语规范：原文中的词为一个术语词条，但译者选择另外一个词作为译文。
+<p>
+ <em>Definition </em>
+   :'Non-adherence to the specified terminology guidelines: The source text word was an entry in the glossary, yet the translator chose a different word as a translation. '
+</p>
+        <em>标注方式</em>
+       ：选择这个术语，详见<a href ="#App2">附录2：英汉术语表</a>。
+     <p>
+       <em>Annotation</em>
+        :  Select the term. Please refer to the Appendix 2: English-Chinese Glossary_Terminology.
+      <p>
+         <b><em>请注意：</em></b>
+       如果存在术语翻译错误，请同时标注该错误为“词义错误”或其它错误（根据错误的性质决定）和“术语错误”。
+     <p>
+       <b><em>Be careful! </em></b>
+         (1) If the translation is an incorrect translation of a word that was present in the glossary, annotate it both as a 'wrong word sense' or 'other' problem (depending on the nature of the incorrect translation) and as a 'terminology' problem.
+      <p>
+         <b><em>请注意：</em></b>
+       如果某一术语翻译也存在，但不符合此处的语境，选择“词义错误”，而不选术语错误。
+     <p>
+       <b><em>Be careful! </em></b>
+         (2) If the translation is one of the possible translations of the word according to the glossary, but not the one needed in this context, select 'wrong word sense', not terminology.
+</p>
+ <p>
+<strong><u><a id ="Hyperonymy">上义词(Hyperonymy)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“译文采用的是上义词或表达，而没有根据原文处理地更加具体或明确。”
+<p>
+ <em>Definition </em>
+   : 'The translation contains a superordinate term or expression even though it could have been translated in an equally specific/explicit way.'
+</p>
+        <em>标注方式</em>
+       ：选择上义词。
+     <p>
+       <em>Annotation</em>
+        :  Select the hypernym.
+       <ul>
+             <li>例:
+                    EN: After an <u>experimental population</u> was released.... (ST02)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: 在······释放了一批<u>实验动物</u>后，······
+            <li>原文想表达的意思是：将一批实验红狼放回只某地。该译文中的“实验动物”不够具体。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Hyponymy">下义词(Hyponymy)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“译文中使用了原文中某一词的下义词，而没有根据原文一样将译文处理地宽泛一些。”
+<p>
+ <em>Definition </em>
+   :'The target text contains a hyponym of the word/expression used in the source text, even though it could have been translated in an equally specific way.'
+</p>
+        <em>标注方式</em>
+       ：选择下义词。
+     <p>
+       <em>Annotation</em>
+        :  Select the hyponym.
+</p>
+
+<p>
+<strong><u><a id ="Overly">过于直译(Overly-literal)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：译文过于直译，原文的隐含意义缺失。
+<p>
+ <em>Definition </em>
+   : The translation is overly literal and the implied meaning of the source text is missing.
+</p>
+        <em>标注方式</em>
+       ：在译文中选择该成分。
+     <p>
+       <em>Annotation</em>
+        : Select the constituent in the target text.
+     <p> <b><em>请注意：</em></b>
+       过于直译的译文为字对字的翻译，字对字的直译。
+     <p>
+       <b><em>Be careful! </em></b>
+        The overly-literal translation is the word-for-word translation.
+      <p>
+       <ul>
+             <li>例:
+                    EN: The federal government's bid to keep <u>North America's only distinctive</u> wolf from disappearing in the wild is in deep trouble, ... (ST02)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: ······联邦政府试图阻止<u>北美唯一一只与众不同的</u>狼在野外消失的努力陷入了困境。
+            <li>原文想表达的意思是：红狼是仅在北美特有的狼种，如果按字面直译为：北美唯一与众不同的狼，则无法传递原文所表达的意思。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Contradiction">语义矛盾(Contradiction)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：目标语和源语所表达的语义有矛盾
+<p>
+ <em>Definition </em>
+   : 'The target text contradicts the source text.'
+</p>
+        <em>标注方式</em>
+       ：选择译文中存在矛盾的成分或句子。<p>
+        <em>Annotation</em>
+       : Select the entire constituent / section of the sentence that contains the contradiction.
+       <ul>
+             <li>例:
+                    EN: TRoberto Altamirano has the lake to himself as he casts his glistening net onto the still water in a perfect circle, lets it sink, then slowly <u>pulls it in</u>. (ST03)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: 罗伯托•阿尔塔米拉诺(Roberto Altamirano)独自拥有这片湖泊，他将闪闪发光的渔网以完美的圆形撒在平静的水面上，让湖水下沉，然后慢慢地<u>把它拉进水里</u>。
+            <li>这里“pull in”是指罗伯托•阿尔塔米拉诺将渔网从水里拉回来，而非把渔网垃进水里。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="AmbiguousT">歧义(Ambiguous translation)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：原文没有歧义，但译文有歧义。
+<p>
+ <em>Definition </em>
+   :  'An unambiguous source text is translated ambiguously.'
+</p>
+        <em>标注方式</em>
+       ：选择译文中存在矛盾的成分或句子。<p>
+        <em>Annotation</em>
+       : Select the entire constituent / section of the sentence that contains the ambiguous translation.
+       <ul>
+             <li>例:
+                    EN: First settled by the Aztecs, who created the <u>original</u> artificial islands, ...(ST03)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: Xochimilco最早由创造了<u>原始</u>人造岛的阿兹特克人定居，······
+            <li>此句中的'original'理解为“最初的”。在汉语中，可以用“原始的”来表达“最初的”意思，比如“原始数据”，但“原始”在此语境中容易让读者误解为是“落后的、古代的”意思，宜处理为“最初的”。因此这里的“原始”属于歧义错误。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Pronoun">代词错译(Pronoun)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“该功能词（如：人称代词、不定代词）在译文中的使用改变了原文所传达的意义。”
+<p>
+ <em>Definition </em>
+   :  "The chosen translation for the pronoun (e.g., personal pronoun, indefinite) leads to a change in meaning between source and target text.
+</p>
+        <em>标注方式</em>
+       ：选择该代词。<p>
+        <em>Annotation</em>
+       : Select the pronoun.
+       <ul>
+             <li>例:
+                    EN:  Roberto Altamirano has the lake to himself as he casts his glistening net onto the still water in a perfect circle, lets <u>it </u>sink, then slowly pulls it in. (ST03)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: 罗伯托•阿尔塔米拉诺(Roberto Altamirano)独自拥有这片湖泊，他将闪闪发光的渔网以完美的圆形撒在平静的水面上，让<u>湖水</u>下沉，然后慢慢地把它拉进水里
+            <li>原文中的"it"应指“渔网”，而非“湖水”。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Quantity">数量错译(Quantity)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：译文所表达的数字或数量与原文所表达不同。
+<p>
+ <em>Definition </em>
+   :  'The number or amount mentioned in the target text is different from that in the source text.'
+</p>
+        <em>标注方式</em>
+       ：如果数字不同，则选择数字，如果数量不同，则选择量化单位。<p>
+        <em>Annotation</em>
+       : If the number is different, select the word. If the amount is different, select the quantifying element.
+       <ul>
+             <li>例:
+                    EN:  At 42, he has watched the number of fishermen here plunge over the years, leading to booming populations of tilapia and carp - <u>invasive species</u> that are threatening the already strained ecosystem of Xochimilco, ... (ST03)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: 在42岁的时候，他目睹了这里渔民的数量多年来急剧下降，导致罗非鱼和鲤鱼的数量激增。鲤鱼和罗非鱼是<u>一种入侵物种</u>，正威胁着已经十分紧张的Xochimilco生态系统。
+            <li>原文中所表达的是罗非鱼和鲤鱼属于不同的入侵物种，而译文把这两种鱼归为一类入侵物种，没有体现复数意义。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Classifier">量词错译(Classifier)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“译文中所使用的量词改变了原文所传达的意义。”
+<p>
+ <em>Definition </em>
+   :  ' The chosen classifier in the target text leads to a change in meaning between source and target text.'
+</p>
+        <em>标注方式</em>
+       ：选择该量词。<p>
+        <em>Annotation</em>
+       : Select the classifier.
+       <ul>
+             <li>例:
+                    EN: ... the group managed to reach an estimated 130 wolves in 2006. The number currently stands at about <u>40</u>, a decline more rapid than even the worst-case scenarios had predicted... (ST02)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: 2006年，该团体成功接触到了大约130只狼。目前这个数字约为<u>40人</u>，下降速度甚至比最坏情况下的预测还要快。
+            <li>原文是想表达“40只狼”，而译文用了“40人”，量词使用错误。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Misplaced">修饰错误(Misplaced word)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ："译文中的某一成分所修饰的词或成分与原文某一成分所修饰的词或成分不同，因此改变了原文的意义。"
+<p>
+ <em>Definition </em>
+   :  'The element in the target text modifies a different word/constituent than the one in the source text, thus changing the meaning.'
+</p>
+        <em>标注方式</em>
+       ：在译文中选择影响原文意义的错位词/修饰词。<p>
+        <em>Annotation</em>
+       :  Select the misplaced word (or the modifier) in the target text that changes the meaning of the ST constituent.
+       <ul>
+             <li>例:
+                    EN: The lander - essentially a high-tech trap outfitted with bait, monitors and underwater cameras - would take four hours to fall all the way to the bottom of the ocean, nearly five miles deep in some areas of the trench, <u>off the coast of Peru and Chile</u>. (ST01)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: 陆器--本质上是一个配备了诱饵、监视器和水下摄像机的高科技陷阱--将需要4个小时才能降落到海底，<u>在秘鲁和智利海岸附近的</u>海沟部分地区，深度接近5英里。
+            <li>此处“off the coast of Peru and Chile”修饰的是the trench，即着陆器需要4个小时才能一路沉入海沟底部，该海沟位于秘鲁和智利海岸附近，部分区域深度接近5英里。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Time">时间错译(Time)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ："译文所表达的时间与原文所表达的时间不同，译文改变了原文的意义。这也许是因为动词时态的错误使用或者错误使用表示时间的元素导致。"
+<p>
+ <em>Definition </em>
+   :  'The time of the target text is different from the one in the source text, which changes the meaning. This can be caused by an incorrect verb tense or temporal element.'
+</p>
+        <em>标注方式</em>
+       ：选择动词或时间元素。<p>
+        <em>Annotation</em>
+       :   Select the verb or the temporal element. 
+       <ul>
+             <li>例:
+                    EN:  <u>At 42</u>, he has watched the number of fishermen here plunge over the years, ...(ST03)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: <u>在42岁的时候</u>，他目睹了这里渔民的数量多年来急剧下降，······
+            <li>“At 42”在原文中指“他今年42岁”，如果处理为“在42岁的时候”，读者会认为他今年已经过了42岁了。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="CohesionT">衔接错译(Cohesion)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“译文中的连接成分表达的关系与原文不同。”
+<p>
+ <em>Definition </em>
+   :  'The conjunction expresses a different relation in the target text than in the source text.'
+</p>
+        <em>标注方式</em>
+       ：选择译文中与原文所表达的关系不同的句子。<p>
+        <em>Annotation</em>
+       :   Select the sentence in the target text that has different relation than in the source text.
+       <ul>
+             <li>例:
+                    EN:  On video, the newly discovered snailfish appeared to be long and gelatinous, with translucent skin and an ethereal movement, <u>as they fed on bait lowered with the trap</u>. (ST01)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: 在视频中，新发现的蜗牛鱼看起来很长，呈胶状，皮肤半透明，动作轻盈，<u>因为它们以科学陷阱投放的诱饵为食</u>。
+            <li>原文中的“as they fed on bait lowered with the trap”是想表达时间关系，是想说当这些鱼咬食诱饵时，动作轻盈，而非表达因果关系。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Function">功能词错译(Function word)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“该功能词（如：介词、助动词、冠词、指示词）在译文中的使用改变了原文所传达的意义。”
+<p>
+ <em>Definition </em>
+   :  'The chosen translation for the function word (e.g., a preposition, "helping verb", article, determiner) leads to a change in meaning between source and target text.'
+</p>
+        <em>标注方式</em>
+       ：选择该功能词。<p>
+        <em>Annotation</em>
+       :   Select the function word.
+       <ul>
+             <li>例:
+                    EN:  ... fierce state opposition <u>from</u> game officials and hunters who are killing it. (ST02)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: 有关部门管理不当、主管官员与捕狼猎人<u>之间</u>的激烈对峙。</u>。
+            <li>“from”在原文中并非表示between（之间的）意思，而表示“来自”，此处应该处理为“来自北卡罗来纳州的猎物管理官员和捕杀红狼的猎人的强烈反对”。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Addition">增译(Addition)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“一个元素虽然有意义，但并未在原文中提及，却出现在译文中。”
+<p>
+ <em>Definition </em>
+   :  'A meaningful element that cannot be derived from the source text is added in the target text.'
+</p>
+        <em>标注方式</em>
+       ：选择增译的部分。<p>
+        <em>Annotation</em>
+       :   Select the added information.
+       <ul>
+             <li>例:
+                    EN:  A colony of red wolves that was reintroduced in North Carolina in 1987 is failing... (ST02)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: 1987年在北卡罗来纳重新引入的一群红狼的<u>计划</u>正在失败······</u>。
+            <li>原文中的“a colony of red wolves...is failing”并没有“计划”的意思，是被试或机器翻译错误理解“failing”后，为自己所增译。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Deletion">漏译(Deletion)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“原文中的元素或关系在译文中被删除。”
+<p>
+ <em>Definition </em>
+   : 'A meaningful element of the source text or relationship present at the lexcial/synactic level in the source text is deleted in the target text.'
+</p>
+       
+        <em><b>请注意</em></b>
+	：请不要将“上义词”错误标注为“漏译”错误。<p>
+        <em><b>Be careful!</em></b>
+	：Cases of hyperonymy must be annotated as such, not as cases of deletion. 
+        <em>标注方式</em>
+       ：在英语原文中选择漏译的元素。<p>
+        <em>Annotation</em>
+       :  Select the elements that are deleted in the English source text.
+       <ul>
+             <li>例:
+                    EN:  ... because of poor management and fierce <u>state</u> opposition from game officials and hunters who are killing it. (ST02)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: ·····原因是管理不善，以及捕杀红狼的狩猎官员和猎人强烈反对。</u>。
+            <li>原文中的state（州层面）在译文中未体现。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Untranslated">未译(Untranslated)</a></u></strong><sup><a href="#fn7" id="ref7">7</a></sup><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“原文中的内容理应翻译，但在译文中仍是原文的内容，并未翻译。”
+<p>
+ <em>Definition </em>
+   :  'Content that should have been translated has been left untranslated.'
+</p>
+        <em>标注方式</em>
+       ：选择未翻译的内容。<p>
+        <em>Annotation</em>
+       :  Select the untranslated content.
+       <ul>
+             <li>例:
+                    EN:  First settled by the <u>Aztecs</u>, who created the original artificial islands, ...(ST03)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: 赫霍奇米尔科最初的定居者是建造了第一批人工岛的<u>Aztecs</u>，······</u>。
+            <li>原文中的'Aztecs'应该处理成：“阿兹特克人”。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Other-L">其它词汇错译(Other lexical mistranslation)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+    <em>定义 </em>
+    ：“该错译是指词义错误以外的词汇错译。”
+<p>
+ <em>Definition </em>
+   :  'The target word is a mistranslation of the ST word, but it is not a possible translatin of the word in the ST.'
+</p>
+        <em>标注方式</em>
+       ：选择译文中错译的词汇。<p>
+        <em>Annotation</em>
+       :  Select the mistranslated target word.
+       <ul>
+             <li>例:
+                    EN:  What researchers captured on camera were three new species of the <u>“elusive”</u> snailfish ...(ST01)</br>
+                    &nbsp &nbsp&nbsp&nbspZH: 研究人员用摄像机捕获的是三种新的<u>“隐居”</u>狮子鱼······
+            <li>原文中的“elusive”应该处理成：“神秘的、难以找到的”，但该词本身没有“隐居”的意思。
+      </ul>
+</p>
+
+<p>
+<strong><u><a id ="Other-M">其它(Other meaning shift)</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+当您发现某一处语义错误不属于以上任何错误类型时，请选择此类别。请务必给出您选择此类别的理由。</p>
+Choose this category when you encounter a meaning shift that does not belong to any of the abovementioned categories. Always explain why you choose this category.
+
+<p>
+<p align="center">
+    <strong><u><a id="Consolidation">确认标注阶段：制定“统一标准”</a></u></strong><a href="#Overview" title="Back to Overview">&#8617;</a>
+<p>
+<strong><u><a id ="Linking">制定“统一标准”</a></u></strong><a href="#AdCats" title="Back to AdCats">&#8617;</a>
+<p align="center">
+<p>
+针对笔者与其中一位外部评分员之间存在分歧的标注信息，须由笔者与另外一位外部评分员进行商讨，直至达成一致为止。如果某一问题重复出现多次，可将该问题纳入标注指南中或在错误类型中增加新的类别。
+<p>
+<strong><u><a id ="App1">附录1：英汉命名实体表”</a></u></strong>
+<p align="center">
+<div align="center">
+</p>
+<table border="1" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td width="300" valign="top">
+                <p>
+                   Atacama Trench
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+                    阿塔卡马海沟/秘鲁-智利海沟
+                </p>
+            </td>
+<tr>
+<tr>
+            <td width="300" valign="top">
+                <p>
+                   U.S. Fish and Wildlife Service
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+                    美国鱼类及野生动（植）物管理局<sup><a href="#fn8" id="ref8">8</a></sup>
+                </p>
+            </td>
+<tr>
+            <td width="300" valign="top">
+                <p>
+                  Alligator River National Wildlife Refuge
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+                    鳄鱼河国家野生动物保护区/阿利盖特河国家野生动物保护区
+                </p>
+            </td>
+<tr>
+<td width="300" valign="top">
+                <p>
+                 Outer Banks
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+                    外滩群岛/北卡州外滩
+                </p>
+            </td>
+<tr>
+            <td width="300" valign="top">
+                <p>
+                 Xochimilco
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+                   （赫）霍奇米尔科
+                </p>
+<tr>
+            </td>
+	   <td width="300" valign="top">
+                <p>
+                 Aztec
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+                   阿兹特克人
+                </p>
+<tr>
+            </td>
+	   <td width="300" valign="top">
+                <p>
+                 Norwegian island of Spitsbergen
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+                   挪威的斯匹次卑尔根岛/斯匹茨卑尔根岛
+                </p>
+            </td>
+  </tr>
+<p>
+           </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<p>
+    <strong></strong>
+</p>
+<u>
+    <br clear="all"/>
+</u>
+<p>
+    <u></u>
+</p>
+<strong><u><a id ="App2">附录2：英汉术语表”</a></u></strong>
+<p align="center">
+<div align="center">
+</p>
+<table border="1" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td width="300" valign="top">
+                <p>
+                   snailfish
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+                 狮子鱼
+                </p>
+            </td>
+<tr>
+<tr>
+            <td width="300" valign="top">
+                <p>
+                  deep-sea lander
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+                 深海着陆器
+                </p>
+            </td>
+<tr>
+            <td width="300" valign="top">
+                <p>
+                 red wolf
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+                红狼/赤狼
+                </p>
+            </td>
+<tr>
+  <td width="300" valign="top">
+                <p>
+                 coyote
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+                郊狼/丛林狼/草原狼
+                </p>
+            </td>
+	<tr>
+  <td width="300" valign="top">
+                <p>
+                 tilapia
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+              罗非鱼
+                </p>
+            </td>
+		<tr>
+  <td width="300" valign="top">
+                <p>
+                carp
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+              鲤鱼
+                </p>
+            </td>
+		<tr>
+  <td width="300" valign="top">
+                <p>
+               global seed vault
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+              全球种子库/国际种子库
+                </p>
+            </td>
+	<tr>
+  <td width="300" valign="top">
+                <p>
+              permafrost
+                </p>
+            </td>
+            <td width="300" valign="top">
+                <p>
+              永冻层/永久冻土层/永冻土/永久冻土
+                </p>
+            </td>
+   </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<p>
+    <strong></strong>
+</p>
+<u>
+    <br clear="all"/>
+</u>
+<p>
+    <u></u>
+</p>
+<strong><u>参考文献</u></strong>
+<p>Burchardt, A., & Lommel, A. (2014). Practical guidelines for the use of MQM in scientific research on translation quality. Retrieved from Berlin, Germany: http://www.qt21.eu/downloads/MQM-usage-guidelines.pdf
+<p>Chen, H.-H. (1994). The contextual analysis of Chinese sentences with punctuation marks. Literary and Linguistic Computing, 9(4), 281-289. 
+<p>Daems, J., Vandepitte, S., Hartsuiker, R. J., & Macken, L. (2017). Translation methods and experience: A comparative analysis of human translation and post-editing with students and professional translators. Meta, 62(2), 245-270. 
+<p>Halliday, M. A. K., & Hasan, R. (1976). Cohesion in English. London: Longman.
+<p>施栋琴. (2002). 英汉进行体结构用上的两个差异及其对翻译实践的启示. 中国科技翻译(2), 23-27. 
+<p>赵秋荣、王克非. (2013). 英译汉翻译语言的阶段性特点——基于历时类比语料库的考察. 中国翻译(3), 15-19. 
+<p>朱永生、郑立信、苗兴伟. (2001). 英汉语篇衔接手段对比研究. 上海: 上海外语教育出版社.
+<div>
+    <br clear="all"/>
+    <hr align="left" size="1" width="33%"/>
+    <sup id="fn1">1. MQM最新的翻译错误类型分类参见：http://www.qt21.eu/mqm-definition/definition-2015-12-30.html<a href="#ref1" title="Jump back to footnote 1 in the text."> 返回正文.</a></sup>
+    <p><sup id="fn2">2. Daems et al.（2017b）的翻译质量评估错误类型分类和标注方法参见：https://users.ugent.be/~jvdaems/TQA_guidelines_2.0.html<a href="#ref2" title="Jump back to footnote 2 in the text."> 返回正文.</a></sup>
+    <p><sup id="fn3">3. 在表达层面的歧义与MQM中忠实度层面的歧义不同，是因为前者强调的是原文可能有歧义，而导致译文表达存在歧义；后者强调原文没有任何歧义，而译者在译文中引入了歧义：http://www.qt21.eu/mqm-definition/issues-list-2015-12-30.html#ambiguous-translation<a href="#ref3" title="Jump back to footnote 3 in the text."> 返回正文.</a></sup> 
+    <p><sup id="fn4">4. 程式化表达和搭配虽然都属于多词单位，但前者的词汇组合强度要大于后者（Yamashita & Jiang, 2010, p. 249）。<a href="#ref4" title="Jump back to footnote 4 in the text."> 返回正文.</a></sup>
+    <p><sup id="fn5">5. 根据语料库数据，汉语句子中约75%的汉语句子包含两个以上的句段，这些句段由逗号或分号分开（Chen, 1994）。本研究借鉴赵秋荣、王克非（2013, p. 17）的做法，将句段定义为由“逗号、冒号、分号、叹号和问号”这些切分标记切分而得的句子片段。<a href="#ref5" title="Jump back to footnote 5 in the text."> 返回正文.</a></sup>
+    <p><sup id="fn6">6. 参考MQM：http://www.qt21.eu/mqm-definition/issues-list-2015-12-30.html#entity<a href="#ref6" title="Jump back to footnote 6 in the text."> 返回正文.</a></sup>
+    <p><sup id="fn7">7. 参考MQM: http://www.qt21.eu/mqm-definition/issues-list-2015-12-30.html#untranslated<a href="#ref7" title="Jump back to footnote 7 in the text."> 返回正文.</a></sup>
+    <p><sup id="fn8">8. 此处不能处理为“服务局”。<a href="#ref8" title="Jump back to footnote 8 in the text."> 返回正文.</a></sup>
+</div>
+
+
+
